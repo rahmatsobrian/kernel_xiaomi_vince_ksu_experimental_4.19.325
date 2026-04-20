@@ -42,9 +42,9 @@ jobs:
             tar -xf zyc-clang.tar.gz
             rm -f zyc-clang.tar.gz
 
-      # - name: Setup KernelSU (Legacy)
-        # run: |
-          # curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s legacy
+      - name: Setup KernelSU (Legacy)
+        run: |
+          curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s legacy
 
       - name: Start Build (with log)
         run: |
