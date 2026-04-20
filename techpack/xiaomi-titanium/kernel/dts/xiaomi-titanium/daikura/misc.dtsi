@@ -1,0 +1,41 @@
+/* msm8953-qrd */
+&soc {
+	i2c@78b6000 { /* BLSP1 QUP3 */
+        led_aw2023: aw2023@46 {
+			compatible = "awinic,aw2023_led-mi8953";
+			reg = <0x46>;
+			vcc-supply = <&pm8953_l5>;
+			vdd-supply = <&pm8953_l10>;
+
+			aw2023,red {
+				aw2023,name = "white";
+				aw2023,id = <0>;
+				aw2023,imax = <2>;
+				aw2023,led-current = <15>;
+				aw2023,max-brightness = <150>;
+				aw2023,rise-time-ms = <6>;
+				aw2023,hold-time-ms = <0>;
+				aw2023,fall-time-ms = <6>;
+				aw2023,off-time-ms = <4>;
+			};
+		};
+	};
+};
+
+&spi_6 {
+	status = "ok";
+	peel_ir@0 {
+		compatible = "peel_ir";
+		reg = <0x0>;
+		spi-max-frequency = <19200000>;
+		vdd-supply = <&pm8953_l8>; //vdd
+		peel_ir,reg-id = "vdd";
+		peel_ir,lr-gpio = <73>;
+		peel_ir,lr-gpio-valid = <0>;
+		peel_ir,spi-bpw = <32>;
+		peel_ir,spi-clk-speed = <960000>;
+		peel_ir,spi-mode = <0>;
+		peel_ir,peel-field = <2345>;
+		status = "ok";
+	};
+};
