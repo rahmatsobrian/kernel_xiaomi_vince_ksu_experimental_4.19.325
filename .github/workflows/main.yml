@@ -39,7 +39,8 @@ jobs:
           cd clang-zyc
             # wget -q $(curl -k https://raw.githubusercontent.com/ZyCromerZ/Clang/main/Clang-main-link.txt) -O zyc-clang.tar.gz
             # wget -q $(curl -k https://raw.githubusercontent.com/ZyCromerZ/Clang/main/Clang-16-link.txt) -O zyc-clang.tar.gz
-            wget -q $(curl -k https://raw.githubusercontent.com/ZyCromerZ/Clang/main/Clang-14-link.txt) -O zyc-clang.tar.gz
+            # wget -q $(curl -k https://raw.githubusercontent.com/ZyCromerZ/Clang/main/Clang-14-link.txt) -O zyc-clang.tar.gz
+            wget -q $(curl -k https://raw.githubusercontent.com/ZyCromerZ/Clang/main/Clang-13-link.txt) -O zyc-clang.tar.gz
             tar -xf zyc-clang.tar.gz
             rm -f zyc-clang.tar.gz
 
@@ -48,6 +49,10 @@ jobs:
           curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s legacy
 
       - name: Start Build (with log)
+        env:
+          # Ubah nilai di bawah ini sesuai keinginan
+          KBUILD_BUILD_USER: "Rahmatsobrian"
+          KBUILD_BUILD_HOST: "ReLIFE"
         run: |
           mkdir -p logs
           bash build.sh 2>&1 | tee logs/build.txt
