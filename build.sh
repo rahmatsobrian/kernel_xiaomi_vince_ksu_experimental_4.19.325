@@ -109,19 +109,19 @@ echo -e "$yellow[+] Getting toolchain info...$white"
 get_toolchain_info
 
 echo -e "$yellow[+] Check root directory...$white"
-ls -a
+# ls -a
     
     echo -e "$yellow[+] Removing out folder...$white"
     rm -rf out
     
 echo -e "$yellow[+] Check root directory...$white"
-ls -a
+# ls -a
     
     echo -e "$yellow[+] Creating out folder...$white"
     mkdir -p out
    
 echo -e "$yellow[+] Check root directory...$white"
-ls -a
+# ls -a
 
 # Setting config
 echo -e "$yellow[+] Preparing kernel config...$white"
@@ -131,12 +131,12 @@ make O=out ARCH=arm64 ${DEFCONFIG} || {
 }
 
 echo -e "$yellow[+] Check root directory...$white"
-ls -a
+# ls -a
 
 BUILD_START=$(TZ=Asia/Jakarta date +%s)
 
 echo -e "$yellow[+] Check out directory before build...$white"
-ls -a out
+# ls -a out
 
 echo -e "$yellow[+] Building Kernel...$white"
 make -j$(nproc --all) \
@@ -163,7 +163,7 @@ echo -e "$yellow[+] Getting kernel version...$white"
 }
 
 echo -e "$yellow[+] Check root directory...$white"
-ls -a
+# ls -a
 
 # =============== Zipping Kernel ===============
 pack_kernel() {
