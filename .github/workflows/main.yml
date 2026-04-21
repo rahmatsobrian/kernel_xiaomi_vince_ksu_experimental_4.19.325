@@ -51,7 +51,7 @@ jobs:
       - name: Start Build (with log)
         env:
           # Ubah nilai di bawah ini sesuai keinginan
-          KBUILD_BUILD_USER: "Rahmatsobrian"
+          KBUILD_BUILD_USER: "RahmatSobrian"
           KBUILD_BUILD_HOST: "ReLIFE"
         run: |
           mkdir -p logs
