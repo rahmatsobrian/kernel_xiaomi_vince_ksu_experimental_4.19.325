@@ -7,7 +7,7 @@ yellow='\033[0;33m'
 white='\033[0m'
 
 # ================= PATH =================
-DEFCONFIG=vendor/vince-perf_defconfig
+DEFCONFIG=vendor/vince-experimental_defconfig
 ROOTDIR=$(pwd)
 OUTDIR="$ROOTDIR/out/arch/arm64/boot"
 ANYKERNEL_DIR="$ROOTDIR/AnyKernel"
