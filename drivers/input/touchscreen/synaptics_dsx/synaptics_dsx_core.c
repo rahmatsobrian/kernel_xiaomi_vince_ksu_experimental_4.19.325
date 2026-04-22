@@ -1124,14 +1124,19 @@ static ssize_t synaptics_rmi4_wake_gesture_show(struct device *dev,
 static ssize_t synaptics_rmi4_wake_gesture_store(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
+	unsigned int input;
 	struct synaptics_rmi4_data *rmi4_data = dev_get_drvdata(dev);
 
-	/* PAKSA MATI DT2W AGAR DEEP SLEEP AMAN */
-	rmi4_data->enable_wakeup_gesture = 0;
+	if (kstrtouint(buf, 10, &input) != 1)
+		return -EINVAL;
+
+	input = input > 0 ? 1 : 0;
+
+	if (rmi4_data->f11_wakeup_gesture || rmi4_data->f12_wakeup_gesture)
+		rmi4_data->enable_wakeup_gesture = input;
 
 	return count;
 }
-
 
 #ifdef USE_DATA_SERVER
 static ssize_t synaptics_rmi4_synad_pid_store(struct device *dev,
@@ -2082,7 +2087,6 @@ static int synaptics_rmi4_irq_enable(struct synaptics_rmi4_data *rmi4_data,
 {
 	int retval = 0;
 	unsigned char *data = NULL;
-	static bool is_irq_requested = false; /* TAMBAHAN: Deklarasi penanda IRQ */
 	const struct synaptics_dsx_board_data *bdata =
 			rmi4_data->hw_if->board_data;
 
@@ -2123,20 +2127,14 @@ static int synaptics_rmi4_irq_enable(struct synaptics_rmi4_data *rmi4_data,
 			goto exit;
 		}
 
-		/* MODIFIKASI: Hanya request IRQ jika belum pernah diminta sebelumnya */
-		if (!is_irq_requested) {
-			retval = request_threaded_irq(rmi4_data->irq, NULL,
-					synaptics_rmi4_irq, bdata->irq_flags,
-					PLATFORM_DRIVER_NAME, rmi4_data);
-			if (retval < 0) {
-				dev_err(rmi4_data->pdev->dev.parent,
-						"%s: Failed to create irq thread\n",
-						__func__);
-				goto exit;
-			}
-			is_irq_requested = true;
-		} else {
-			enable_irq(rmi4_data->irq);
+		retval = request_threaded_irq(rmi4_data->irq, NULL,
+				synaptics_rmi4_irq, bdata->irq_flags,
+				PLATFORM_DRIVER_NAME, rmi4_data);
+		if (retval < 0) {
+			dev_err(rmi4_data->pdev->dev.parent,
+					"%s: Failed to create irq thread\n",
+					__func__);
+			goto exit;
 		}
 
 		retval = synaptics_rmi4_int_enable(rmi4_data, true);
@@ -2147,7 +2145,7 @@ static int synaptics_rmi4_irq_enable(struct synaptics_rmi4_data *rmi4_data,
 	} else {
 		if (rmi4_data->irq_enabled) {
 			disable_irq(rmi4_data->irq);
-			/* MODIFIKASI: free_irq dihilangkan agar tidak memicu kernel panic */
+			free_irq(rmi4_data->irq, rmi4_data);
 			rmi4_data->irq_enabled = false;
 		}
 	}
@@ -4029,8 +4027,8 @@ static int synaptics_rmi4_get_reg(struct synaptics_rmi4_data *rmi4_data,
 	}
 
 	retval = regulator_set_voltage(rmi4_data->pwr_reg,
-        2800000,
-        2800000);
+			3000000,
+			3008000);
 	if (retval < 0) {
 		dev_err(rmi4_data->pdev->dev.parent,
 				"%s: Failed to set regulator voltage avdd\n",
