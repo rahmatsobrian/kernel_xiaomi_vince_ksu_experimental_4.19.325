@@ -125,8 +125,10 @@ static void cluster_prepare(struct lpm_cluster *cluster,
 static bool print_parsed_dt;
 module_param_named(print_parsed_dt, print_parsed_dt, bool, 0664);
 
-static bool sleep_disabled;
-module_param_named(sleep_disabled, sleep_disabled, bool, 0664);
+/* --- RELIFE PATCH: Bypass Bootloader Cmdline Sabotage --- */
+static bool sleep_disabled = false;
+// module_param_named(sleep_disabled, sleep_disabled, bool, 0664);
+/* -------------------------------------------------------- */
 
 /**
  * msm_cpuidle_get_deep_idle_latency - Get deep idle latency value
@@ -658,8 +660,10 @@ static inline bool lpm_disallowed(s64 sleep_us, int cpu, struct lpm_cpu *pm_cpu)
 	if (cpu_isolated(cpu))
 		goto out;
 
-	if (sleep_disabled)
-		return true;
+	/* --- RELIFE PATCH: Force Allow Sleep --- */
+	// if (sleep_disabled)
+	// 	return true;
+	/* --------------------------------------- */
 
 	bias_time = sched_lpm_disallowed_time(cpu);
 	if (bias_time) {
