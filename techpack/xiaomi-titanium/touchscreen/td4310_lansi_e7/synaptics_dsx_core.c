@@ -4843,6 +4843,11 @@ static int synaptics_rmi4_suspend (struct device *dev)
 		}
 		synaptics_rmi4_wakeup_gesture (rmi4_data, true);
 		enable_irq_wake (rmi4_data->irq);
+		
+		/* --- RELIFE KERNEL PATCH: Block spam IRQ saat suspend --- */
+		disable_irq_nosync(rmi4_data->irq);
+		/* -------------------------------------------------------- */
+		
 		goto exit;
 	}
 
@@ -4896,6 +4901,11 @@ static int synaptics_rmi4_resume (struct device *dev)
 
 	if (rmi4_data->enable_wakeup_gesture) {
 		disable_irq_wake (rmi4_data->irq);
+		
+		/* --- RELIFE KERNEL PATCH: Wakeup IRQ --- */
+		enable_irq(rmi4_data->irq);
+		/* --------------------------------------- */
+		
 		synaptics_rmi4_wakeup_gesture (rmi4_data, false);
 		goto exit;
 	}
