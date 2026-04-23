@@ -4726,7 +4726,12 @@ static int synaptics_rmi4_early_suspend (struct early_suspend *h)
 					sizeof (device_ctrl));
 		}
 		synaptics_rmi4_wakeup_gesture (rmi4_data, true);
-		enable_irq_wake (rmi4_data->irq);
+		
+		/* --- RELIFE KERNEL PATCH: HARDWARE WAKEUP BLOCK --- */
+		// enable_irq_wake (rmi4_data->irq);
+		disable_irq_nosync(rmi4_data->irq);
+		/* -------------------------------------------------- */
+		
 		goto exit;
 	}
 
@@ -4777,7 +4782,10 @@ static int synaptics_rmi4_late_resume (struct early_suspend *h)
 		return retval;
 
 	if (rmi4_data->enable_wakeup_gesture) {
-		disable_irq_wake (rmi4_data->irq);
+		/* --- RELIFE KERNEL PATCH: RESTORE NORMAL IRQ --- */
+		// disable_irq_wake (rmi4_data->irq);
+		enable_irq(rmi4_data->irq);
+		/* ----------------------------------------------- */
 		goto exit;
 	}
 
@@ -4842,11 +4850,11 @@ static int synaptics_rmi4_suspend (struct device *dev)
 					sizeof (device_ctrl));
 		}
 		synaptics_rmi4_wakeup_gesture (rmi4_data, true);
-		enable_irq_wake (rmi4_data->irq);
 		
-		/* --- RELIFE KERNEL PATCH: Block spam IRQ saat suspend --- */
+		/* --- RELIFE KERNEL PATCH: HARDWARE WAKEUP BLOCK --- */
+		// enable_irq_wake (rmi4_data->irq);
 		disable_irq_nosync(rmi4_data->irq);
-		/* -------------------------------------------------------- */
+		/* -------------------------------------------------- */
 		
 		goto exit;
 	}
@@ -4900,11 +4908,10 @@ static int synaptics_rmi4_resume (struct device *dev)
 		return 0;
 
 	if (rmi4_data->enable_wakeup_gesture) {
-		disable_irq_wake (rmi4_data->irq);
-		
-		/* --- RELIFE KERNEL PATCH: Wakeup IRQ --- */
+		/* --- RELIFE KERNEL PATCH: RESTORE NORMAL IRQ --- */
+		// disable_irq_wake (rmi4_data->irq);
 		enable_irq(rmi4_data->irq);
-		/* --------------------------------------- */
+		/* ----------------------------------------------- */
 		
 		synaptics_rmi4_wakeup_gesture (rmi4_data, false);
 		goto exit;
