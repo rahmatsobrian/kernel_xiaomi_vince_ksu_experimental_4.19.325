@@ -51,6 +51,13 @@
 				label = "system-active";
 				qcom,psci-mode = <0>;
 				qcom,latency-us = <423>;
+				
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <423>;
+				qcom,exit-latency-us = <423>;
+				qcom,min-residency-us = <719>;
+				/* The value need custom tune */
+
 				qcom,ss-power = <349>;
 				qcom,energy-overhead = <299110>;
 				qcom,time-overhead = <719>;
@@ -61,6 +68,13 @@
 				label = "system-wfi";
 				qcom,psci-mode = <1>;
 				qcom,latency-us = <480>;
+				
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <480>;
+				qcom,exit-latency-us = <480>;
+				qcom,min-residency-us = <753>;
+				/* The value need custom tune */
+
 				qcom,ss-power = <348>;
 				qcom,energy-overhead = <313989>;
 				qcom,time-overhead = <753>;
@@ -72,6 +86,13 @@
 				label = "system-pc";
 				qcom,psci-mode = <3>;
 				qcom,latency-us = <11027>;
+				
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <11027>;
+				qcom,exit-latency-us = <11027>;
+				qcom,min-residency-us = <1495>;
+				/* The value need custom tune */
+
 				qcom,ss-power = <340>;
 				qcom,energy-overhead = <616035>;
 				qcom,time-overhead = <1495>;
@@ -94,6 +115,13 @@
 					label = "pwr-l2-wfi";
 					qcom,psci-mode = <1>;
 					qcom,latency-us = <180>;
+					
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <180>;
+				qcom,exit-latency-us = <180>;
+				qcom,min-residency-us = <270>;
+				/* The value need custom tune */
+
 					qcom,ss-power = <361>;
 					qcom,energy-overhead = <113215>;
 					qcom,time-overhead = <270>;
@@ -104,6 +132,13 @@
 					label = "pwr-l2-retention";
 					qcom,psci-mode = <3>;
 					qcom,latency-us = <188>;
+					
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <188>;
+				qcom,exit-latency-us = <188>;
+				qcom,min-residency-us = <307>;
+				/* The value need custom tune */
+
 					qcom,ss-power = <360>;
 					qcom,energy-overhead = <121271>;
 					qcom,time-overhead = <307>;
@@ -117,6 +152,13 @@
 					label = "pwr-l2-gdhs";
 					qcom,psci-mode = <4>;
 					qcom,latency-us = <212>;
+					
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <212>;
+				qcom,exit-latency-us = <212>;
+				qcom,min-residency-us = <363>;
+				/* The value need custom tune */
+
 					qcom,ss-power = <354>;
 					qcom,energy-overhead = <150748>;
 					qcom,time-overhead = <363>;
@@ -130,6 +172,13 @@
 					label = "pwr-l2-pc";
 					qcom,psci-mode = <5>;
 					qcom,latency-us = <421>;
+					
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <421>;
+				qcom,exit-latency-us = <421>;
+				qcom,min-residency-us = <690>;
+				/* The value need custom tune */
+
 					qcom,ss-power = <350>;
 					qcom,energy-overhead = <277479>;
 					qcom,time-overhead = <690>;
@@ -152,6 +201,13 @@
 						label = "wfi";
 						qcom,psci-cpu-mode = <1>;
 						qcom,latency-us = <1>;
+						
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <1>;
+				qcom,exit-latency-us = <1>;
+				qcom,min-residency-us = <61>;
+				/* The value need custom tune */
+
 						qcom,ss-power = <395>;
 						qcom,energy-overhead = <30424>;
 						qcom,time-overhead = <61>;
@@ -162,6 +218,13 @@
 						label = "pc";
 						qcom,psci-cpu-mode = <3>;
 						qcom,latency-us = <180>;
+						
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <180>;
+				qcom,exit-latency-us = <180>;
+				qcom,min-residency-us = <270>;
+				/* The value need custom tune */
+
 						qcom,ss-power = <361>;
 						qcom,energy-overhead = <113215>;
 						qcom,time-overhead = <270>;
@@ -186,6 +249,13 @@
 					label = "perf-l2-wfi";
 					qcom,psci-mode = <1>;
 					qcom,latency-us = <179>;
+					
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <179>;
+				qcom,exit-latency-us = <179>;
+				qcom,min-residency-us = <268>;
+				/* The value need custom tune */
+
 					qcom,ss-power = <362>;
 					qcom,energy-overhead = <113242>;
 					qcom,time-overhead = <268>;
@@ -196,6 +266,13 @@
 					label = "perf-l2-retention";
 					qcom,psci-mode = <3>;
 					qcom,latency-us = <186>;
+					
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <186>;
+				qcom,exit-latency-us = <186>;
+				qcom,min-residency-us = <306>;
+				/* The value need custom tune */
+
 					qcom,ss-power = <361>;
 					qcom,energy-overhead = <125982>;
 					qcom,time-overhead = <306>;
@@ -209,6 +286,13 @@
 					label = "perf-l2-gdhs";
 					qcom,psci-mode = <4>;
 					qcom,latency-us = <210>;
+					
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <210>;
+				qcom,exit-latency-us = <210>;
+				qcom,min-residency-us = <361>;
+				/* The value need custom tune */
+
 					qcom,ss-power = <355>;
 					qcom,energy-overhead = <155728>;
 					qcom,time-overhead = <361>;
@@ -222,6 +306,13 @@
 					label = "perf-l2-pc";
 					qcom,psci-mode = <5>;
 					qcom,latency-us = <423>;
+					
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <423>;
+				qcom,exit-latency-us = <423>;
+				qcom,min-residency-us = <719>;
+				/* The value need custom tune */
+
 					qcom,ss-power = <349>;
 					qcom,energy-overhead = <299110>;
 					qcom,time-overhead = <719>;
@@ -244,6 +335,13 @@
 						label = "wfi";
 						qcom,psci-cpu-mode = <1>;
 						qcom,latency-us = <1>;
+						
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <1>;
+				qcom,exit-latency-us = <1>;
+				qcom,min-residency-us = <61>;
+				/* The value need custom tune */
+
 						qcom,ss-power = <397>;
 						qcom,energy-overhead = <30424>;
 						qcom,time-overhead = <61>;
@@ -254,6 +352,13 @@
 						label = "pc";
 						qcom,psci-cpu-mode = <3>;
 						qcom,latency-us = <179>;
+						
+				/* For fix deep sleep, add this */
+				qcom,entry-latency-us = <179>;
+				qcom,exit-latency-us = <179>;
+				qcom,min-residency-us = <268>;
+				/* The value need custom tune */
+
 						qcom,ss-power = <362>;
 						qcom,energy-overhead = <113242>;
 						qcom,time-overhead = <268>;
